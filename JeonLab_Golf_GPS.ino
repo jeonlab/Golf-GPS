@@ -272,9 +272,10 @@ void golfSelect()
   else
   {
     myOLED.clrScr();
-    myOLED.print("Front?", CENTER, 0);
-    myOLED.print("Yes", LEFT, 48);
-    myOLED.print("No", RIGHT, 48);
+    myOLED.print("Front", CENTER, 0);
+    myOLED.print("or Back", CENTER, 16);
+    myOLED.print("Front", LEFT, 48);
+    myOLED.print("Back", RIGHT, 48);
     myOLED.update();
     while (digitalRead(switch1_pin) && digitalRead(switch2_pin));
     if (!digitalRead(switch1_pin))
