@@ -87,7 +87,7 @@ extern uint8_t Ubuntu_Num_24x32[];
 #include <SoftwareSerial.h>
 SoftwareSerial gps(7, -1); // RX, TX
 const int MSG_LENGTH = 57;
-const int TimeZone = -5; //EST
+const int TimeZone = -5; //EST, change this for your timezone (UTC +/- xx)
 int DSTbegin[] = { //DST 2013 - 2025 in Canada and US
   310, 309, 308, 313, 312, 311, 310, 308, 314, 313, 312, 310, 309
 };
@@ -258,7 +258,7 @@ void golfSelect()
     if (!digitalRead(switch2_pin))
     {
       courseIndex++;
-      if (courseIndex > (num_courses + 1)) courseIndex = 0;
+      if (courseIndex >= (num_courses + 1)) courseIndex = 0;
       delay(500);
     }
     if (!digitalRead(switch1_pin)) break;
