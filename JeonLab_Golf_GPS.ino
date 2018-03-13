@@ -27,7 +27,7 @@ const String selectMode[] PROGMEM = {
   "Play", // 1
   "Manual", //2
   "Course", // 3
-  "Drive" // 4
+  "Drive/Stop" // 4
 };
 
 const PROGMEM float coord[][2][19] = { //coord[course index][0:lat, 1:long][hole #, 0:office]
@@ -125,7 +125,7 @@ int currentHole;
 int mode = 4;
 int totalShot = 0;
 int currentShot = 0;
-int distanceToGreen;
+long distanceToGreen;
 boolean courseSelected = false;
 boolean lowBat = false;
 boolean onGreen = false;
@@ -201,6 +201,21 @@ void loop()
       mode = 1;
       break;
     case 4: //drive or walk
+      if (totalShot != 0)
+      {
+        myOLED.clrScr();
+        myOLED.print("Total Shot:", CENTER, 16);
+        myOLED.setFont(Ubuntu_Num_24x32);
+        myOLED.printNumI(totalShot, CENTER, 32);
+        myOLED.setFont(franklingothic_12x16);
+        myOLED.update();
+        totalShot = 0;
+        while (digitalRead(switch1_pin) && digitalRead(switch2_pin));
+        myOLED.invert(true);
+        delay(100);
+        myOLED.invert(false);
+        delay(500);
+      }
       showGPSdata();
       break;
   }
